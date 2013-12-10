@@ -1,0 +1,59 @@
+%p#notice= notice
+
+%p
+  %b Fb eid:
+  = @event.fb_eid
+%p
+  %b Name:
+  = @event.name
+%p
+  %b Description:
+  = @event.description
+%p
+  %b Start time:
+  = @event.start_time
+%p
+  %b End time:
+  = @event.end_time
+%p
+  %b Location:
+  = @event.location
+%p
+  %b Picture:
+  %br 
+  %img{ :title => "", :src => "#{@event.picture}" }
+%p
+  %b Ticket uri:
+  = @event.ticket_uri
+
+%p
+  %b Street:
+  = @event.place.street
+%p
+  %b City:
+  = @event.place.city
+%p
+  %b State:
+  = @event.place.state
+%p
+  %b Country:
+  = @event.place.country
+%p
+  %b Zip:
+  = @event.place.zip
+%p
+  %b Latitude:
+  = @event.place.latitude
+%p
+  %b Longitude:
+  = @event.place.longitude
+%p
+  %b Name:
+  = @event.place.name
+%p
+  %b Event:
+  = @event.place.event_id
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

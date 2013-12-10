@@ -1,0 +1,64 @@
+= form_for @event do |f|
+  - if @event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :fb_eid
+    = f.text_field :fb_eid
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :start_time
+    = f.datetime_select :start_time
+  .field
+    = f.label :end_time
+    = f.datetime_select :end_time
+  .field
+    = f.label :location
+    = f.text_field :location
+  .field
+    = f.label :picture
+    = f.file_field :picture
+  .field
+    = f.label :ticket_uri
+    = f.text_field :ticket_uri
+
+  = f.fields_for :place do |builder|
+    %fieldset
+      .field
+        = builder.label :street
+        = builder.text_field :street
+      .field
+        = builder.label :city
+        = builder.text_field :city
+      .field
+        = builder.label :state
+        = builder.text_field :state
+      .field
+        = builder.label :country
+        = builder.text_field :country
+      .field
+        = builder.label :zip
+        = builder.text_field :zip
+      .field
+        = builder.label :latitude
+        = builder.text_field :latitude
+      .field
+        = builder.label :longitude
+        = builder.text_field :longitude
+      .field
+        = builder.label :name
+        = builder.text_field :name
+      .field
+        = builder.label :event
+        = builder.hidden_field :event
+  .actions
+    = f.submit 'Save'

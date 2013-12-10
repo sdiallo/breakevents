@@ -1,0 +1,34 @@
+<div id="map-canvas"></div>
+%h1 Listing events
+
+%table
+  %tr
+    %th Fb eid
+    %th Name
+    %th Description
+    %th Start time
+    %th End time
+    %th Location
+    %th Picture
+    %th Ticket uri
+    %th
+    %th
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= event.fb_eid
+      %td= event.name
+      %td= event.description
+      %td= event.start_time
+      %td= event.end_time
+      %td= event.location
+      %td= event.picture
+      %td= event.ticket_uri
+      %td= link_to 'Show', event
+      %td= link_to 'Edit', edit_event_path(event)
+      %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Event', new_event_path

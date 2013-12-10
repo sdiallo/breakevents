@@ -1,0 +1,35 @@
+%h1 Listing places
+
+%table
+  %tr
+    %th Street
+    %th City
+    %th State
+    %th Country
+    %th Zip
+    %th Latitude
+    %th Longitude
+    %th Name
+    %th Event
+    %th
+    %th
+    %th
+
+  - @places.each do |place|
+    %tr
+      %td= place.street
+      %td= place.city
+      %td= place.state
+      %td= place.country
+      %td= place.zip
+      %td= place.latitude
+      %td= place.longitude
+      %td= place.name
+      %td= place.event
+      %td= link_to 'Show', place
+      %td= link_to 'Edit', edit_place_path(place)
+      %td= link_to 'Destroy', place, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Place', new_place_path

@@ -1,0 +1,34 @@
+%h1 Listing profiles
+
+%table
+  %tr
+    %th Avatar
+    %th First name
+    %th Last name
+    %th Gender
+    %th Website
+    %th Locale
+    %th Bio
+    %th User
+    %th
+    %th
+    %th
+
+  - @profiles.each do |profile|
+    %tr
+      %td
+      %img{ :title => "", :src => "#{profile.avatar}" }
+      %td= profile.first_name
+      %td= profile.last_name
+      %td= profile.gender
+      %td= profile.website
+      %td= profile.locale
+      %td= profile.bio
+      %td= profile.user
+      %td= link_to 'Show', profile
+      %td= link_to 'Edit', edit_profile_path(profile)
+      %td= link_to 'Destroy', profile, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Profile', new_profile_path

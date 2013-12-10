@@ -1,0 +1,40 @@
+%p#notice= notice
+
+%p
+  %b Street:
+  = @place.street
+%p
+  %b City:
+  = @place.city
+%p
+  %b State:
+  = @place.state
+%p
+  %b Country:
+  = @place.country
+%p
+  %b Zip:
+  = @place.zip
+%p
+  %b Latitude:
+  = @place.latitude
+%p
+  %b Longitude:
+  = @place.longitude
+%p
+  %b Name:
+  = @place.name
+%p
+  %b Event:
+  = @place.event
+
+%h3 Nearby Locations
+%ul
+  - for place in @place.nearbys(300)
+    %li
+      = link_to place.city, place
+      (#{place.distance.round(2)} miles)
+
+= link_to 'Edit', edit_place_path(@place)
+\|
+= link_to 'Back', places_path

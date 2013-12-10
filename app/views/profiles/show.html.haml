@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Avatar:
+  %img{ :title => "", :src => "#{@profile.avatar}" } 
+%p
+  %b First name:
+  = @profile.first_name
+%p
+  %b Last name:
+  = @profile.last_name
+%p
+  %b Gender:
+  = @profile.gender
+%p
+  %b Website:
+  = @profile.website
+%p
+  %b Locale:
+  = @profile.locale
+%p
+  %b Bio:
+  = @profile.bio
+%p
+  %b User:
+  = @profile.user
+
+= link_to 'Edit', edit_profile_path(@profile)
+\|
+= link_to 'Back', profiles_path

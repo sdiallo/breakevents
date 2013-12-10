@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fb_eid: 
+  name: MyString
+  description: MyText
+  start_time: 2013-11-21 00:56:20
+  end_time: 2013-11-21 00:56:20
+  location: MyString
+  picture: MyString
+  ticket_uri: MyString
+
+two:
+  fb_eid: 
+  name: MyString
+  description: MyText
+  start_time: 2013-11-21 00:56:20
+  end_time: 2013-11-21 00:56:20
+  location: MyString
+  picture: MyString
+  ticket_uri: MyString
