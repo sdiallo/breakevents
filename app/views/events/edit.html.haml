@@ -1,7 +1,5 @@
-%h1 Editing event
-
-= render 'form'
-
-= link_to 'Show', @event
-\|
-= link_to 'Back', events_path
+.container
+	- model_class = Event
+	.page-header
+		%h1 Editer "#{@event.name}"
+	= render :partial => "form"

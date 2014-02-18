@@ -1,23 +1,31 @@
 class HomeController < ApplicationController
   def index
-    @events = Event.all
+    if params[:search].present?
+      redirect_to city_events_path(params[:search])
+    else
+      @events = Event.all
+    end  
   end
 
+  def get_city_events
+    @places  = Place.near(params[:city], 50, :order => :event_id)
+      @events = []
+      @places.each do |place|
+        @events << place.event
+      end
 
-  def get_event_data
- 
-  	@event = Event.all
-  	#raise @event00.inspect
-  
-  	@places = []
-  	@event.each do |event|
-  		@places << event.place
-  		
-  	end
-  	data  = { 
-  				'events' => @event,
-  				'places' => @places }
-  	render json: data
- 
+  end
+
+  def city_events_data
+    @places  = Place.near(params[:city], 50, :order => :event_id)
+      @events = []
+      @places.each do |place|
+        @events << place.event
+      end
+    data  = { 
+          'events' => @events,
+          'places' => @places }
+      render json: data
+    
   end
 end

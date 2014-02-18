@@ -6,6 +6,7 @@ class PlacesController < ApplicationController
   def index
     if params[:search].present?
       @places  = Place.near(params[:search], 50, :order => :event_id)
+ 
     else
       @places = Place.all
     end  

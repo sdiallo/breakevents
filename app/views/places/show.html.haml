@@ -1,40 +1,45 @@
-%p#notice= notice
+- model_class = Place
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
 
 %p
-  %b Street:
+  %strong= model_class.human_attribute_name(:street) + ':'
+  %br
   = @place.street
 %p
-  %b City:
+  %strong= model_class.human_attribute_name(:city) + ':'
+  %br
   = @place.city
 %p
-  %b State:
+  %strong= model_class.human_attribute_name(:state) + ':'
+  %br
   = @place.state
 %p
-  %b Country:
+  %strong= model_class.human_attribute_name(:country) + ':'
+  %br
   = @place.country
 %p
-  %b Zip:
+  %strong= model_class.human_attribute_name(:zip) + ':'
+  %br
   = @place.zip
 %p
-  %b Latitude:
+  %strong= model_class.human_attribute_name(:latitude) + ':'
+  %br
   = @place.latitude
 %p
-  %b Longitude:
+  %strong= model_class.human_attribute_name(:longitude) + ':'
+  %br
   = @place.longitude
 %p
-  %b Name:
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
   = @place.name
 %p
-  %b Event:
-  = @place.event
+  %strong= model_class.human_attribute_name(:event_id) + ':'
+  %br
+  = @place.event_id
 
-%h3 Nearby Locations
-%ul
-  - for place in @place.nearbys(300)
-    %li
-      = link_to place.city, place
-      (#{place.distance.round(2)} miles)
-
-= link_to 'Edit', edit_place_path(@place)
-\|
-= link_to 'Back', places_path
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), places_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_place_path(@place), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), place_path(@place), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

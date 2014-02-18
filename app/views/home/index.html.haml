@@ -1,34 +1,42 @@
-<div id="map-canvas"></div>
-%h1 Listing events
+#homesearch.home-full
+  .home-back 
+  #home-cont.container
+    %h1 Find breakdance event in your city
+    .searchboxarea.form-inline
+      = form_tag root_path,:class => "rien", method: :get do
+        = text_field_tag :search, params[:search], :placeholder=>"Enter your city name", :class=> "cont-search"
+        = button_tag "Search Near", :name => nil, :class => "btn btn-submit searchicon" do
+          %span.input-group-btn
+            %i.icon-search
+      .searchicon.btn.btn-submit
+        %i.icon-screenshot
+  .home-scroll-down
+    = link_to "#" do 
+      %i.icon-chevron-down
+.container.well
+  %h1 World best break event  
+  #home-cont2.masonry-event.well
+    
+    - @events.each do |event|
+      .event-wrap
+        %h3
+          = event.name
+        .clearfix
+          = "@#{event.location}"
+        .clearfix
+          = event.start_time
+        .clearfix
+          %img{ :title => "", :src => "#{event.picture.thumb.url}" }
+        .clearfix
+          = event.ticket_uri
+        .clearfix
+          = event.description
+        %footer
+        = link_to 'Show', event
+        = link_to 'Edit', edit_event_path(event)
+        = link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%table
-  %tr
-    %th Fb eid
-    %th Name
-    %th Description
-    %th Start time
-    %th End time
-    %th Location
-    %th Picture
-    %th Ticket uri
-    %th
-    %th
-    %th
 
-  - @events.each do |event|
-    %tr
-      %td= event.fb_eid
-      %td= event.name
-      %td= event.description
-      %td= event.start_time
-      %td= event.end_time
-      %td= event.location
-      %td= event.picture
-      %td= event.ticket_uri
-      %td= link_to 'Show', event
-      %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
 
 = link_to 'New Event', new_event_path

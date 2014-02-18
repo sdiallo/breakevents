@@ -1,4 +1,5 @@
 Break::Application.routes.draw do
+  get "dashboard/index"
   get "event_importer/index"
   resources :places
 
@@ -6,8 +7,8 @@ Break::Application.routes.draw do
 
   resources :profiles
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do
-    delete '/users/disconnect/:provider', :to => 'users#disconnect_omniauth_provider', :as => 'disconnect_omniauth_provider'
+  devise_for :user, :controllers => { :omniauth_callbacks => "user/omniauth_callbacks" } do
+    delete '/user/disconnect/:provider', :to => 'user#disconnect_omniauth_provider', :as => 'disconnect_omniauth_provider'
     end
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
@@ -21,7 +22,20 @@ Break::Application.routes.draw do
 
    get 'event_importer/:fb_eid/import_event' => 'event_importer#import_event', :as => 'import_event'
 
-   get '/get_event_data' => 'home#get_event_data', :as => 'get_event_data'
+   post '/get_event_data' => 'home#get_event_data', :as => 'get_event_data'
+
+   get 'city_events/:city' => 'home#get_city_events', :as => 'city_events'
+
+   post '/:city/city_events_data' => 'home#city_events_data', :as => 'city_events_data'
+
+   get '/dashboard/invitations' => 'dashboard#invitations', :as => 'user_invitations'
+
+
+   post 'dashboard/:fb_eid/going' => 'dashboard#going', :as => 'going_event'
+
+   post 'dashboard/:fb_eid/maybe' => 'dashboard#maybe', :as => 'maybe_event'
+
+   post 'dashboard/:fb_eid/declined' => 'dashboard#declined', :as => 'declined_event'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

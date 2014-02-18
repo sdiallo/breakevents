@@ -10,86 +10,97 @@
   <%= csrf_meta_tags %>
      <style type="text/css">
      
-      #map-canvas { height: 500px; }
+      #map-canvas { height: 350px;
+        margin: 0px 10px ;
+       }
+      #map-canvas img {
+          max-width: none;
+        }
     </style>
  
  
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
+  <header class="preheadnav">
     <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="/">Break</a>
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li class="active"><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
-          <li><%= link_to('Events', events_path, :method => :get) %></li>
-          <li><%= link_to('location', places_path, :method => :get) %></li>
-          <li><%= link_to('Importer', event_importer_index_path, :method => :get) %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-            </ul>
-          </li>
-        </ul>
+      <div class="span5">
+        <%= image_tag "logo_BD.png" %>
+      </div>
+      <div class="span5">
         <div class="navbar-search">
-          <%= form_tag places_path, :method => :get do %>
-  
-              <%= text_field_tag :search, params[:search] %>
-              <%= submit_tag "Search Near", :name => nil %>
-           
+          <%= form_tag root_path,:class => "form-inline", method: :get do %>
+              <%= text_field_tag :search, params[:search], :placeholder=>"Search your city"  %>
+              <%= submit_tag "Search Near", :name => nil, :class => "btn btn-submit"%> 
           <% end %>
         </div>
-        </ul>
-        <ul class="nav pull-right">
-          <% if current_user %>
-              <li class="dropdown">
-                <a href="#" id="account-dropdown"class="settings dropdown-toggle" data-toggle="dropdown"><%= current_user.id %></a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to('Mon Compte', edit_user_registration_path) %></li>
-                  <li><%= link_to('Mon Profile', '#', :method => :get) %></li>
-                  <li class="divider"></li>
-                  <li id="logout"><%= link_to('logout', destroy_user_session_path, :method => :delete) %></li>
-                </ul>
-              </li>
-              <li>
-                <img src = "http://graph.facebook.com/<%= "#{current_user.fb_id}"%>/picture" style = "height: 40px;">
-                
-                <%= "#{current_user.name}" %></li>
-              <li id="sign_out"><%= link_to('logout', destroy_user_session_path, :method => :delete) %></li>
-              <li><%= link_to('Mon profile', profile_path(current_user.profile.id), :method => :get) %></li>
-          <% else %>
-              <li>
-                <%= link_to('Sign in', new_user_session_path)  %>
-              </li>
-              <li>
-                <%= link_to('Sign up', new_user_registration_path)  %>
-              </li>
-              <li>
-                <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)%>
-              </li>
-              <li id ='user-info'></li>
+      </div>
+    </div>
+  </header>
+  <div class="navbar navbar-static-top" id ="navtop">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/">Break</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
+            <li><%= link_to('Events', events_path, :method => :get) %></li>
+            <li><%= link_to('location', places_path, :method => :get) %></li>
+            <li><%= link_to('Importer', event_importer_index_path, :method => :get) %></li>
+            <li>
+              <% if params[:city] %>
+              <a href="#" "data-toggle" ="modal", "data-target" = "#myeventModal"> <%= "#{params[:city]}" %></a>
+              <% end %>
+            
+              </ul>
+            </li>
+          </ul>
 
-          <% end %>
-        </ul>
-      </div><!-- /.nav-collapse -->
-    </div><!-- /.container -->
-  </div><!-- /.navbar-inner -->
-</div><!-- /.navbar -->
+          <ul class="nav pull-right">
+            <% if current_user %>
+                <li>
+                  <img src = "http://graph.facebook.com/<%= "#{current_user.fb_id}"%>/picture" style = "height: 40px;">                
+                  <%= "#{current_user.name}" %></li>
+                <li id="sign_out"><%= link_to('logout', destroy_user_session_path, :method => :delete) %></li>
+                <li><%= link_to 'Dashboard', dashboard_index_path %></li>
+            <% else %>
+                <li>
+                  <%= link_to('Sign in', new_user_session_path)  %>
+                </li>
+                <li>
+                  <%= link_to('Sign up', new_user_registration_path)  %>
+                </li>
+                <li>
+                  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)%>
+                </li>
+            <% end %>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </div><!-- /.navbar-inner -->
+  </div><!-- /.navbar --> 
 
-<div class="row-fluid"> 
-       
-       
-            <%= yield %> 
-     
-</div>
+  <div class="row">
+    <div class="container">
+      <%= bootstrap_flash %>
+    </div> 
+      
+    <%= yield %> 
+  </div>   
+
+  <footer>
+    <div id="footer1">
+
+    </div>
+    <div id="footer2">
+    </div>
+  </footer>
 
 </body>
+
+
 </html>

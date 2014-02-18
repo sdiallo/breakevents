@@ -1,59 +1,51 @@
-%p#notice= notice
+.container
+  .page-header
+    %h1= @event.name.titleize
+  .span3
+    .img
+      = image_tag ("#{@event.picture}")
+    
+  .span8 
+    - model_class = Event
 
-%p
-  %b Fb eid:
-  = @event.fb_eid
-%p
-  %b Name:
-  = @event.name
-%p
-  %b Description:
-  = @event.description
-%p
-  %b Start time:
-  = @event.start_time
-%p
-  %b End time:
-  = @event.end_time
-%p
-  %b Location:
-  = @event.location
-%p
-  %b Picture:
-  %br 
-  %img{ :title => "", :src => "#{@event.picture}" }
-%p
-  %b Ticket uri:
-  = @event.ticket_uri
+    %p
+      %strong= model_class.human_attribute_name(:fb_eid) + ':'
+      %br
+      = @event.fb_eid
+    %p
+      %strong= model_class.human_attribute_name(:name) + ':'
+      %br
+      = @event.name
+    %p
+      %strong= model_class.human_attribute_name(:description) + ':'
+      %br
+      = @event.description
+    %p
+      %strong= model_class.human_attribute_name(:start_time) + ':'
+      %br
+      = @event.start_time
+    %p
+      %strong= model_class.human_attribute_name(:end_time) + ':'
+      %br
+      = @event.end_time
+    %p
+      %strong= model_class.human_attribute_name(:location) + ':'
+      %br
+      = @event.place.street
+    %p
+      %strong= model_class.human_attribute_name(:picture) + ':'
+      %br
+      = image_tag ("#{@event.picture}")
+    %p
+      %strong= model_class.human_attribute_name(:ticket_uri) + ':'
+      %br
+      = @event.ticket_uri
+    %p
+      %strong= model_class.human_attribute_name(:user_id) + ':'
+      %br
+      = @event.user_id
 
-%p
-  %b Street:
-  = @event.place.street
-%p
-  %b City:
-  = @event.place.city
-%p
-  %b State:
-  = @event.place.state
-%p
-  %b Country:
-  = @event.place.country
-%p
-  %b Zip:
-  = @event.place.zip
-%p
-  %b Latitude:
-  = @event.place.latitude
-%p
-  %b Longitude:
-  = @event.place.longitude
-%p
-  %b Name:
-  = @event.place.name
-%p
-  %b Event:
-  = @event.place.event_id
-
-= link_to 'Edit', edit_event_path(@event)
-\|
-= link_to 'Back', events_path
+    .form-actions
+      = link_to t('.back', :default => t("helpers.links.back")), events_path, :class => 'btn'
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_event_path(@event), :class => 'btn'
+      = link_to t('.destroy', :default => t("helpers.links.destroy")), event_path(@event), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

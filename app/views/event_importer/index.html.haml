@@ -1,31 +1,22 @@
-%h1 Listing events
 
 %table
   %tr
-    %th Fb eid
+    %th pic
     %th Name
-    %th Description
     %th Start time
     %th End time
     %th Location
-    %th Picture
-    %th Ticket uri
     %th
     %th
     %th
 
   - @events.each do |event|
     %tr
-      %td= "#{event.raw_attributes[:id]}"
+      %td
+        %img{ :title => "", :src => "http://graph.facebook.com/#{"#{event.raw_attributes[:id]}"}/picture" }
       %td= "#{event.raw_attributes[:name]}"
-      %td= "#{event.raw_attributes[:description]}"
       %td= "#{event.raw_attributes[:start_time]}"
       %td= "#{event.raw_attributes[:end_time]}"
-      %td= "#{event.raw_attributes[:location]}"
-      %td= "#{event.raw_attributes[:ticket_uri]}"
-      %td= link_to 'import_event', import_event_path("#{event.raw_attributes[:id]}" )
+      %td= "@#{event.raw_attributes[:location]}"
+      %td= link_to 'import_event', import_event_path("#{event.raw_attributes[:id]}"), :class => "btn"
       
-
-%br
-
-= link_to 'New Event', new_event_path

@@ -1,33 +1,37 @@
-%h1 Listing events
-
-%table
-  %tr
-    %th Fb eid
-    %th Name
-    %th Description
-    %th Start time
-    %th End time
-    %th Location
-    %th Picture
-    %th Ticket uri
-    %th
-    %th
-    %th
-
-  - @events.each do |event|
+- model_class = Event
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
     %tr
-      %td= event.fb_eid
-      %td= event.name
-      %td= event.description
-      %td= event.start_time
-      %td= event.end_time
-      %td= event.location
-      %td= event.picture
-      %td= event.ticket_uri
-      %td= link_to 'Show', event
-      %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:fb_eid)
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:start_time)
+      %th= model_class.human_attribute_name(:end_time)
+      %th= model_class.human_attribute_name(:location)
+      %th= model_class.human_attribute_name(:picture)
+      %th= model_class.human_attribute_name(:ticket_uri)
+      %th= model_class.human_attribute_name(:user_id)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= link_to event.id, event_path(event)
+        %td= event.fb_eid
+        %td= event.name
+        %td= event.description
+        %td= event.start_time
+        %td= event.end_time
+        %td= event.location
+        %td= event.picture
+        %td= event.ticket_uri
+        %td= event.user_id
+        %td=l event.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_event_path(event), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), event_path(event), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-%br
-
-= link_to 'New Event', new_event_path
+= link_to t('.new', :default => t("helpers.links.new")), new_event_path, :class => 'btn btn-primary'

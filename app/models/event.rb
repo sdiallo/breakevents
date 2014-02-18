@@ -3,4 +3,5 @@ class Event < ActiveRecord::Base
 	has_one :place, :dependent => :destroy
 	accepts_nested_attributes_for :place 
 	mount_uploader :picture, PictureUploader
+	validates_presence_of :name, :description
 end

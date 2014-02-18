@@ -2,21 +2,21 @@
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
-@iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings");
-@iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings-white");
+@iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
 
 // Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
-@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot#iefix");
-@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
-@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
-@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
+@fontAwesomeEotPath: font-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: font-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: font-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: font-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: font-url("fontawesome-webfont.svg#fontawesomeregular");
 
 // Font Awesome
 @import "fontawesome/font-awesome";
 
 // Glyphicons
-//@import "twitter/bootstrap/sprites.less";
+@import "twitter/bootstrap/sprites.less";
 
 // Your custom LESS stylesheets goes here
 //
@@ -28,29 +28,153 @@
 //
 // Example:
 // @linkColor: #ff0000;
+#footer1{
+	height: 200px;
+	background-color: #252525;
 
-body {
-  margin-top: 60px;
+}
+#footer2 {
+	height: 50px;
+	background-color: #141414;
+}
+.preheadnav{
+	background-color: #505050;
 }
 
-.span9 {
-		padding:12px;
-		margin:auto;
-		min-height:800px;
-		display: block;
-		padding-left:22px;
-		width: 100
+#eventcar {
+	height: 300px;
+	display: block;
+}
+.event-wrap{
+	margin: 6px;
+	background: #505050;
+	border: 1px solid red;
+	padding: 7px;
+	width: 320px;
+	float: left;
+	&:hover {
+			border-color: black;
+			background-color: #141414;
+			opacity: 100%;
+
+			}
+}
+.event-view{
+	position: relative;
+	font-size: 13px;
+	padding: 0 !important;
+	margin: 0 -2px 0 0 !important;
+	float: left;
+	width: 300px;
+}
+
+#homesearch{
+	margin-bottom: 0px;
+}
+
+.home-scroll-down{
+	color: #fff;
+	font-size: 30px;
+	position: absolute;
+	z-index: 2;
+	bottom: 0px;
+	width: 100%;
+	text-align: center;
+	background: transparent;
+	opacity: 0.8;
+}
+.home-scroll-down a {
+	background: rgba(0,0,0,0.4);
+	color: #fff;
+	padding: 5px 15px;
+	text-decoration: none;
+	display: inline-block;
+	
+}
+.home-back{
+	background-position: 50% 50%; 
+	background: url("home-hight.jpeg") 50%; 
+	background-size: 100%;
+	background-size: cover;
+	width:100%;
+	height:100%; 
+	position:absolute;
+	right: 0;
+	z-index:1;
+	background-color:#3E4B55;
+}
+#home-cont {
+position: relative;
+z-index: 50;
+text-align: center;
+	.searchboxarea {
+		position: relative;
+		width: 750px;
+		padding: 10px;
+		margin-top: 0;
+		margin-left: auto;
+		margin-right: auto;
 	}
-
-.span3 {
-		float:right;
-		border:1px solid red;
-		margin:auto;
-		min-height:300px;
-		padding:12px;
-
+	.searchicon {
+		height: 48px;
+		font-size: 20px;
+		line-height: 40px;
+		text-align: center;
+		background: rgb(149, 149, 202);
+		border: none;
 	}
+	.cont-search {
+		width: 500px;
+		height: 40px;
+		padding-left: 15px;
+		outline: none;
+		font-size: 20px;
+		line-height: 40px;
+		border: none;
+		background: rgba(141, 104, 104, 0.4);
+	}
+	h1 {
+		background: rgba(22,22,22,0.6);
+		width: 750px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 0;
+		color: #fff;
+		font-size: 40px;
+	}
+}
+#home-cont2 {
+	margin-bottom: 80px;
+	margin-top: 80px;
+}
+#right_menu {
+	height:100%;
+}
+.alaune{
+	height: 350px;
+	padding: 5px 6px
+}
+.filters{
+	min-height: 600px;
+	background-color: red;
+}
 
-.well {
-	width:100%
+
+body {
+
+}
+.navbar-inner{
+	background-image: linear-gradient(to bottom, #252525, #141414);
+}
+.carousel-inner{
+	height: 350px;
+}
+#navtop.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:999999;
+}
+.jumbotron{
+
 }

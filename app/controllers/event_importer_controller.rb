@@ -1,22 +1,30 @@
 class EventImporterController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-  	user = FbGraph::User.new("me", :access_token => current_user.fb_token).fetch
+  	user = FbGraph::User.new("me", :access_token => current_user.fb_token)
   	@events = user.events
-  	
-  	#@events.each do |event|
-  		# raise @events.inspect
-  	#end
+    # event = FbGraph::Event.fetch(fb_eid], :access_token => current_user.fb_token)
+    # raise user.home.inspect
+    # raise @events.inspect
+    render :layout => false
+  
+  	# @events.each do |event|
+  		  
+  	# end
   end
 
   def import_event
   	event = FbGraph::Event.fetch(params[:fb_eid], :access_token => current_user.fb_token)
-   # raise event.inspect
+    # raise event.raw_attributes.inspect
+    
     @event = Event.create!(fb_eid:params[:fb_eid],
                   name:event.raw_attributes[:name],
                   description:event.raw_attributes[:description],
                   start_time:event.raw_attributes[:start_time],
                   end_time:event.raw_attributes[:end_time],
                   location:event.raw_attributes[:location],
+                  user_id:current_user.id
                
                   )
     Place.create(street:event.raw_attributes[:venue][:street],
